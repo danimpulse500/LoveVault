@@ -1,0 +1,178 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff5f8;
+  color: #333;
+  overflow-x: hidden;
+  padding-bottom: 60px; /* space for footer */
+}
+
+.hidden { display: none; }
+
+/* LOCK SCREEN */
+#lockScreen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#fbc2eb, #f8cdda);
+}
+
+#lockScreen input {
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  margin: 10px;
+}
+
+#lockScreen button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+/* TOP CONTROLS */
+.top-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 50;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.dark .control-btn {
+  background: rgba(28,28,36,0.8);
+  color: #fff;
+}
+
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f48fb1, #fff5f8);
+  background-size: 200% 200%;
+  animation: gradientFlow 12s ease infinite;
+  position: relative;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-family: 'Parisienne', cursive;
+  font-size: 2.8rem;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: nameReveal 1.6s ease forwards 0.5s;
+  color: whitesmoke;
+}
+
+.hero .subtitle {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: #333;
+  opacity: 0;
+  animation: fadeIn 2s forwards 1.5s;
+}
+
+.private-note {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  pointer-events: none;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 2s forwards 2s;
+  letter-spacing: 0.5px;
+  transition: opacity 0.6s ease;
+}
+
+@keyframes nameReveal { to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes gradientFlow { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
+
+/* DARK MODE */
+.dark { background: #0f0f14; color: #eee; }
+.dark .hero { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+
+/* CARD */
+.card { background: rgba(255,245,248,0.75); backdrop-filter: blur(14px); margin:20px; padding:26px; border-radius:22px; box-shadow:0 12px 40px rgba(0,0,0,0.12); }
+.dark .card { background: rgba(60,60,78,0.75); }
+
+/* PETALS / HEARTS */
+.petal { position: fixed; bottom:-40px; font-size:18px; opacity:0.8; pointer-events:none; animation: petalFloat linear forwards; }
+@keyframes petalFloat { from { bottom:-40px; transform:rotate(0deg); opacity:0.8; } to { bottom:110vh; transform:rotate(360deg); opacity:0; } }
+
+.card-stack {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  height: 380px;
+  margin: 40px auto;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.card-stack img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  transition: transform 0.4s ease, z-index 0.4s ease;
+  transform-origin: center center;
+}
+
+/* initial stack */
+.card-stack img:nth-child(1){ transform:translate(0,0) scale(1); z-index:4; }
+.card-stack img:nth-child(2){ transform:translate(15px,15px) scale(0.95); z-index:3; }
+.card-stack img:nth-child(3){ transform:translate(30px,30px) scale(0.9); z-index:2; }
+.card-stack img:nth-child(4){ transform:translate(45px,45px) scale(0.85); z-index:1; }
+
+/* spread mode */
+.card-stack.spread img {
+  /* var(--offset) will be set by JS relative to center card */
+  transform: translateX(var(--offset)) scale(var(--scale));
+}
+
+/* active card */
+.card-stack img.active {
+  transform: translateX(0px) scale(1.05);
+  z-index: 10;
+}
+
+/* FOOTER */
+footer{ position:fixed; bottom:0; width:100%; text-align:center; padding:15px 0; background:rgba(255,255,255,0.1); color:black; backdrop-filter:blur(6px); z-index:50; }

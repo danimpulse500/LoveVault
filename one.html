@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You | A Private Expression</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Mode Colors - Sophisticated Palette */
+            --primary-color: #d4a574;
+            --secondary-color: #b08d57;
+            --accent-color: #8b7355;
+            --background-color: #f8f5f2;
+            --card-color: #ffffff;
+            --text-color: #2c2c2c;
+            --shadow-color: rgba(180, 150, 120, 0.08);
+            --gradient: linear-gradient(135deg, #d4a574 0%, #b08d57 100%);
+            --glass-bg: rgba(255, 255, 255, 0.92);
+            --border-color: rgba(212, 165, 116, 0.15);
+            --overlay-color: rgba(0, 0, 0, 0.6);
+            
+            /* Typography */
+            --serif-font: 'Cormorant Garamond', serif;
+            --sans-font: 'Montserrat', sans-serif;
+            
+            /* Animation Speeds */
+            --transition-speed: 0.5s;
+            --slow-transition: 0.8s;
+        }
+
+        .dark-mode {
+            /* Dark Mode Colors - Sophisticated Palette */
+            --primary-color: #c19a6b;
+            --secondary-color: #8b7355;
+            --accent-color: #6b5b3e;
+            --background-color: #1a1a1a;
+            --card-color: #2a2a2a;
+            --text-color: #eaeaea;
+            --shadow-color: rgba(193, 154, 107, 0.1);
+            --gradient: linear-gradient(135deg, #c19a6b 0%, #8b7355 100%);
+            --glass-bg: rgba(42, 42, 42, 0.92);
+            --border-color: rgba(193, 154, 107, 0.2);
+            --overlay-color: rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color var(--slow-transition), color var(--slow-transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            font-family: var(--serif-font);
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        /* Premium Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+        }
+
+        /* Lock Screen - Elegant Design */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lock-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .lock-container {
+            background: var(--glass-bg);
+            padding: 4rem;
+            border-radius: 2px;
+            text-align: center;
+            max-width: 460px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+            transform: translateY(0);
+            animation: floatIn 1s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .lock-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--primary-color);
+            opacity: 0.8;
+        }
+
+        .password-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            letter-spacing: 1px;
+            font-family: var(--serif-font);
+        }
+
+        .password-subtitle {
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            font-family: var(--sans-font);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .password-input-container {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 1.1rem;
+            background: transparent;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            font-family: var(--sans-font);
+            letter-spacing: 2px;
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-bottom-color: var(--primary-color);
+            background: rgba(212, 165, 116, 0.03);
+        }
+
+        .dark-mode .password-input:focus {
+            background: rgba(193, 154, 107, 0.05);
+        }
+
+        .unlock-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 1rem 3rem;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1.5px;
+            width: 100%;
+            font-family: var(--sans-font);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unlock-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .unlock-btn:hover {
+            color: white;
+            border-color: transparent;
+        }
+
+        .unlock-btn:hover::before {
+            left: 0;
+        }
+
+        .password-error {
+            margin-top: 1.5rem;
+            min-height: 1.5rem;
+            font-weight: 400;
+            color: var(--primary-color);
+            font-family: var(--sans-font);
+            font-size: 0.9rem;
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+            box-shadow: 0 5px 20px var(--shadow-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .music-control:hover {
+            transform: scale(1.05);
+            color: var(--secondary-color);
+        }
+
+        .music-control.active {
+            color: white;
+            background: var(--gradient);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section - Minimalist Elegance */
+        .hero-section {
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: var(--primary-color);
+            opacity: 0.5;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-family: var(--sans-font);
+            line-height: 1.8;
+        }
+
+        .private-note {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: var(--glass-bg);
+            border-radius: 0;
+            display: inline-block;
+            color: var(--text-color);
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+            font-style: normal;
+            font-weight: 300;
+            position: relative;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .private-note::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-size: 5rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        /* Note Section - Elegant Card */
+        .note-section {
+            background: var(--card-color);
+            padding: 4rem;
+            margin-bottom: 6rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .note-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .note-title {
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: var(--sans-font);
+        }
+
+        .note-content {
+            line-height: 1.8;
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        .note-content p {
+            margin-bottom: 2rem;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Premium Card Gallery */
+        .gallery-section {
+            margin-bottom: 6rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 4rem;
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-family: var(--sans-font);
+        }
+
+        .gallery-container {
+            position: relative;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+            overflow: visible;
+            width: 100%;
+        }
+
+        .card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .card {
+            position: absolute;
+            width: 360px;
+            height: 500px;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all var(--transition-speed) cubic-bezier(0.23, 1, 0.32, 1);
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .card.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .card.left {
+            transform: translate(-120%, -50%) scale(0.85);
+            opacity: 0.7;
+            z-index: 5;
+            pointer-events: auto;
+        }
+
+        .card.right {
+            transform: translate(20%, -50%) scale(0.85);
+            opacity: 0.7;
+            z-index: 5;
+            pointer-events: auto;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .card.active:hover img {
+            transform: scale(1.02);
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .gallery-instructions {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-top: 2.5rem;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            font-family: var(--sans-font);
+            opacity: 0.7;
+        }
+
+        /* Heart Animation */
+        .floating-heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 24px;
+            color: var(--primary-color);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 15s linear infinite;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Elegant Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: transparent;
+            color: var(--text-color);
+            margin-top: 4rem;
+            position: relative;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-family: var(--sans-font);
+            font-size: 0.9rem;
+        }
+
+        .footer-heart {
+            color: var(--primary-color);
+            animation: heartbeat 2s ease infinite;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        /* Animations */
+        @keyframes floatIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .card {
+                width: 320px;
+                height: 440px;
+            }
+            
+            .gallery-container {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .note-section {
+                padding: 3rem;
+            }
+            
+            .card {
+                width: 280px;
+                height: 380px;
+            }
+            
+            .gallery-container {
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 4rem 1rem 3rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .note-title, .gallery-title {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                width: 240px;
+                height: 320px;
+            }
+            
+            .gallery-container {
+                height: 360px;
+            }
+            
+            .lock-container {
+                padding: 3rem 2rem;
+            }
+            
+            .music-control {
+                top: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .note-section {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .card {
+                width: 200px;
+                height: 280px;
+            }
+            
+            .gallery-container {
+                height: 320px;
+            }
+            
+            .private-note {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .card {
+                width: 180px;
+                height: 250px;
+            }
+            
+            .gallery-container {
+                height: 280px;
+            }
+            
+            .gallery-controls {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lock Screen -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-container">
+            <div class="lock-icon">✧</div>
+            <h2 class="password-title">For Your Eyes Only</h2>
+            <p class="password-subtitle">A private expression awaits</p>
+            <div class="password-input-container">
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter the code">
+            </div>
+            <button class="unlock-btn" id="unlockBtn">Unveil</button>
+            <div class="password-error" id="passwordError"></div>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-play"></i>
+    </div>
+
+    <!-- Floating Heart -->
+    <div id="floatingHeartContainer"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title" id="valentineName">For You</h1>
+            <p class="hero-subtitle">In the quiet moments between heartbeats, I find myself thinking of you. Your presence has become the gentle rhythm to which my life now dances.</p>
+            <div class="private-note">
+                Some things are felt too deeply for words. This is one of them.
+            </div>
+        </section>
+
+        <!-- Note Section -->
+        <section class="note-section">
+            <h2 class="note-title">A Timeless Feeling</h2>
+            <div class="note-content">
+                <p>There are moments in life that transcend the ordinary, that carve themselves into the very fabric of our being. Meeting you was one of those moments. It wasn't loud or dramatic—it was quiet, like the settling of dusk, and just as inevitable.</p>
+                <p>I've come to understand that love isn't always about grand gestures. It's in the subtle things: the way you listen with your entire being, the thoughtful pauses between your words, the quiet strength you carry without even realizing it. It's in the shared silences that feel more meaningful than any conversation.</p>
+                <p>With you, time behaves differently. Hours feel like moments, and moments stretch into eternity when we're together. There's a comfort in your presence that I've never known before—a sense of being exactly where I'm meant to be.</p>
+                <p>This isn't about promises or expectations. It's simply an acknowledgement of something beautiful that exists between us—something rare and precious that deserves to be honored, cherished, and protected.</p>
+            </div>
+        </section>
+
+        <!-- Card Gallery -->
+        <section class="gallery-section">
+            <h2 class="gallery-title">Moments Captured</h2>
+            <div class="gallery-container">
+                <div class="card-stack" id="cardStack">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="prevCard">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-btn" id="nextCard">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <p class="gallery-instructions">Swipe or use arrows to navigate through memories</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with <span class="footer-heart">❤️</span> for someone special</p>
+        <p>Forever in this moment</p>
+    </footer>
+
+    <!-- Background Music (Snowman by Sia - Instrumental) -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://assets.codepen.io/1468070/snowman-instrumental.mp3" type="audio/mpeg">
+        <source src="https://assets.codepen.io/1468070/snowman-instrumental.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // DOM Elements
+        const lockScreen = document.getElementById('lockScreen');
+        const passwordInput = document.getElementById('passwordInput');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const passwordError = document.getElementById('passwordError');
+        const musicControl = document.getElementById('musicControl');
+        const valentineName = document.getElementById('valentineName');
+        const cardStack = document.getElementById('cardStack');
+        const prevCardBtn = document.getElementById('prevCard');
+        const nextCardBtn = document.getElementById('nextCard');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const floatingHeartContainer = document.getElementById('floatingHeartContainer');
+        
+        // App State
+        const state = {
+            isUnlocked: false,
+            isDarkMode: true, // Start in dark mode for premium feel
+            isMusicPlaying: false,
+            currentCardIndex: 0,
+            totalCards: 5,
+            cards: [],
+            isAnimating: false,
+            touchStartX: 0,
+            touchEndX: 0
+        };
+        
+        // Correct password
+        const CORRECT_PASSWORD = "rose"; // Change this to your preferred code
+        
+        // Premium Image URLs - Elegant, artistic images
+        const cardData = [
+            { image: "https://images.unsplash.com/photo-1529254479751-fbacb4c7a587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80", caption: "" },
+            { image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80", caption: "" },
+            { image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80", caption: "" },
+            { image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80", caption: "" },
+            { image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80", caption: "" }
+        ];
+        
+        // Initialize the page
+        function init() {
+            // Start in dark mode
+            document.body.classList.add('dark-mode');
+            
+            // Create cards
+            createCards();
+            
+            // Position cards
+            positionCards();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Create floating heart
+            createFloatingHeart();
+            
+            // Add subtle entrance animation
+            animateEntrance();
+        }
+        
+        // Create elegant card elements
+        function createCards() {
+            cardStack.innerHTML = '';
+            state.cards = [];
+            
+            for (let i = 0; i < state.totalCards; i++) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = i;
+                
+                const img = document.createElement('img');
+                img.src = cardData[i].image;
+                img.alt = `Memory ${i + 1}`;
+                img.loading = 'lazy';
+                
+                card.appendChild(img);
+                cardStack.appendChild(card);
+                
+                state.cards.push(card);
+            }
+            
+            // Set the active card
+            state.cards[state.currentCardIndex].classList.add('active');
+        }
+        
+        // Position cards with elegant layout
+        function positionCards() {
+            if (state.isAnimating) return;
+            
+            state.isAnimating = true;
+            
+            state.cards.forEach((card, index) => {
+                card.classList.remove('active', 'left', 'right');
+                
+                if (index === state.currentCardIndex) {
+                    card.classList.add('active');
+                    card.style.transform = 'translate(-50%, -50%)';
+                    card.style.opacity = '1';
+                    card.style.zIndex = '10';
+                } else if (index === (state.currentCardIndex - 1 + state.totalCards) % state.totalCards) {
+                    card.classList.add('left');
+                    card.style.transform = 'translate(-120%, -50%) scale(0.85)';
+                    card.style.opacity = '0.7';
+                    card.style.zIndex = '5';
+                } else if (index === (state.currentCardIndex + 1) % state.totalCards) {
+                    card.classList.add('right');
+                    card.style.transform = 'translate(20%, -50%) scale(0.85)';
+                    card.style.opacity = '0.7';
+                    card.style.zIndex = '5';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.zIndex = '1';
+                }
+            });
+            
+            // Reset animation flag after transition completes
+            setTimeout(() => {
+                state.isAnimating = false;
+            }, 500);
+        }
+        
+        // Create elegant floating heart
+        function createFloatingHeart() {
+            // Clear container
+            floatingHeartContainer.innerHTML = '';
+            
+            // Create heart
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '❤️';
+            
+            // Random position
+            const left = 10 + Math.random() * 80;
+            heart.style.left = `${left}%`;
+            
+            // Random animation duration
+            const duration = 20 + Math.random() * 20;
+            heart.style.animationDuration = `${duration}s`;
+            
+            // Random size
+            const size = 20 + Math.random() * 15;
+            heart.style.fontSize = `${size}px`;
+            
+            // Random opacity
+            const opacity = 0.4 + Math.random() * 0.4;
+            heart.style.opacity = opacity;
+            
+            floatingHeartContainer.appendChild(heart);
+            
+            // Create new heart when this one finishes
+            setTimeout(() => {
+                heart.remove();
+                createFloatingHeart();
+            }, duration * 1000);
+        }
+        
+        // Add subtle entrance animation
+        function animateEntrance() {
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const privateNote = document.querySelector('.private-note');
+            
+            // Initial state
+            heroTitle.style.opacity = '0';
+            heroTitle.style.transform = 'translateY(30px)';
+            
+            heroSubtitle.style.opacity = '0';
+            heroSubtitle.style.transform = 'translateY(30px)';
+            
+            privateNote.style.opacity = '0';
+            privateNote.style.transform = 'translateY(30px)';
+            
+            // Animate in sequence
+            setTimeout(() => {
+                heroTitle.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroTitle.style.opacity = '1';
+                heroTitle.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    heroSubtitle.style.transition = 'opacity 1s ease 0.3s, transform 1s ease 0.3s';
+                    heroSubtitle.style.opacity = '1';
+                    heroSubtitle.style.transform = 'translateY(0)';
+                    
+                    setTimeout(() => {
+                        privateNote.style.transition = 'opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s';
+                        privateNote.style.opacity = '1';
+                        privateNote.style.transform = 'translateY(0)';
+                    }, 600);
+                }, 300);
+            }, 500);
+        }
+        
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Password unlock
+            unlockBtn.addEventListener('click', unlockContent);
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    unlockContent();
+                }
+            });
+            
+            // Music toggle
+            musicControl.addEventListener('click', toggleMusic);
+            
+            // Card navigation
+            prevCardBtn.addEventListener('click', () => {
+                if (!state.isAnimating) {
+                    showPrevCard();
+                }
+            });
+            
+            nextCardBtn.addEventListener('click', () => {
+                if (!state.isAnimating) {
+                    showNextCard();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!state.isUnlocked || state.isAnimating) return;
+                
+                if (e.key === 'ArrowLeft') {
+                    showPrevCard();
+                } else if (e.key === 'ArrowRight') {
+                    showNextCard();
+                }
+            });
+            
+            // Touch swipe for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchStartTime = 0;
+            
+            cardStack.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = Date.now();
+            }, { passive: true });
+            
+            cardStack.addEventListener('touchmove', (e) => {
+                if (!touchStartX) return;
+                
+                const touchX = e.touches[0].clientX;
+                const touchY = e.touches[0].clientY;
+                
+                // Calculate swipe distance
+                const diffX = touchStartX - touchX;
+                const diffY = touchStartY - touchY;
+                
+                // If horizontal movement is dominant, prevent vertical scroll
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            cardStack.addEventListener('touchend', (e) => {
+                if (!touchStartX) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchEndTime = Date.now();
+                
+                // Calculate swipe distance and duration
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                const duration = touchEndTime - touchStartTime;
+                
+                // Only handle horizontal swipes with minimal vertical movement
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30 && duration < 300) {
+                    if (diffX > 0) {
+                        // Swipe left - next card
+                        showNextCard();
+                    } else {
+                        // Swipe right - previous card
+                        showPrevCard();
+                    }
+                }
+                
+                // Reset touch tracking
+                touchStartX = 0;
+                touchStartY = 0;
+                touchStartTime = 0;
+            }, { passive: true });
+            
+            // Window resize
+            window.addEventListener('resize', () => {
+                positionCards();
+            });
+        }
+        
+        // Unlock content with password
+        function unlockContent() {
+            const password = passwordInput.value.trim();
+            
+            if (password === CORRECT_PASSWORD) {
+                // Hide lock screen with elegant animation
+                lockScreen.classList.add('hidden');
+                state.isUnlocked = true;
+                
+                // Auto-play music
+                setTimeout(() => {
+                    if (!state.isMusicPlaying) {
+                        toggleMusic();
+                    }
+                }, 1000);
+                
+                // Set focus to body for keyboard controls
+                document.body.focus();
+                
+                // Add elegant unlock effect
+                addUnlockEffect();
+            } else {
+                passwordError.textContent = "Incorrect. Try again.";
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // Subtle shake animation
+                passwordInput.style.animation = 'none';
+                setTimeout(() => {
+                    passwordInput.style.animation = 'shake 0.5s';
+                }, 10);
+            }
+        }
+        
+        // Add elegant unlock effect
+        function addUnlockEffect() {
+            // Create a subtle ripple effect
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.top = '50%';
+            ripple.style.left = '50%';
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'var(--gradient)';
+            ripple.style.opacity = '0.3';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.zIndex = '1999';
+            ripple.style.pointerEvents = 'none';
+            
+            document.body.appendChild(ripple);
+            
+            // Animate ripple
+            setTimeout(() => {
+                ripple.style.transition = 'all 1s ease-out';
+                ripple.style.width = '200vw';
+                ripple.style.height = '200vw';
+                ripple.style.opacity = '0';
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            }, 10);
+        }
+        
+        // Toggle background music
+        function toggleMusic() {
+            if (state.isMusicPlaying) {
+                backgroundMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-play"></i>';
+                musicControl.classList.remove('active');
+            } else {
+                backgroundMusic.play().catch(e => {
+                    console.log("Autoplay prevented. User interaction required.");
+                    musicControl.innerHTML = '<i class="fas fa-play"></i>';
+                });
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                musicControl.classList.add('active');
+            }
+            
+            state.isMusicPlaying = !state.isMusicPlaying;
+        }
+        
+        // Show previous card
+        function showPrevCard() {
+            state.currentCardIndex = (state.currentCardIndex - 1 + state.totalCards) % state.totalCards;
+            positionCards();
+        }
+        
+        // Show next card
+        function showNextCard() {
+            state.currentCardIndex = (state.currentCardIndex + 1) % state.totalCards;
+            positionCards();
+        }
+        
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+        
+        // Add shake animation for password input
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

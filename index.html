@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️ | A Premium Valentine's Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+        }
+
+:root {
+  /* Premium Rose Palette */
+
+  --primary-color: #8b1e3f;        /* Deep wine rose */
+  --secondary-color: #c94a6a;      /* Muted blush */
+  --accent-color: #e6a6b8;         /* Soft rose highlight */
+
+  --background-color: #ffe2eaff;     /* Clean off-white */
+  --card-color: #ffffff;
+
+  --text-color: #1f1a1c;           /* Near-black (premium) */
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --border-color: rgba(0, 0, 0, 0.08);
+
+  /* Subtle luxury gradient */
+  --gradient: linear-gradient(
+    135deg,
+    #8b1e3f 0%,
+    #c94a6a 100%
+  );
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+
+  /* Motion */
+  --transition-speed: 0.35s;
+  --slow-transition: 0.7s;
+}
+
+
+
+        .dark-mode {
+            /* Dark Mode Colors - Premium Palette */
+            --primary-color: #d17aff;
+            --secondary-color: #a663cc;
+            --accent-color: #7b2cbf;
+            --background-color: #0f0a1e;
+            --card-color: #1a132e;
+            --text-color: #f5f0ff;
+            --shadow-color: rgba(209, 122, 255, 0.1);
+            --gradient: linear-gradient(135deg, #a663cc 0%, #7b2cbf 100%);
+            --glass-bg: rgba(26, 19, 46, 0.85);
+            --border-color: rgba(209, 122, 255, 0.15);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color var(--slow-transition), color var(--slow-transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Premium Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 5px;
+        }
+
+        /* Lock Screen - Premium Design */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(230, 57, 118, 0.95) 0%, rgba(255, 126, 179, 0.95) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lock-screen.dark-mode {
+            background: linear-gradient(135deg, rgba(166, 99, 204, 0.95) 0%, rgba(123, 44, 191, 0.95) 100%);
+        }
+
+        .lock-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .lock-container {
+            background: var(--glass-bg);
+            padding: 3.5rem;
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+            transform: translateY(0);
+            animation: floatIn 1s ease-out;
+        }
+
+        .lock-icon {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+        }
+
+        .password-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            letter-spacing: 0.5px;
+        }
+
+        .password-subtitle {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .password-input-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--card-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(230, 57, 118, 0.2);
+        }
+
+        .dark-mode .password-input:focus {
+            box-shadow: 0 5px 20px rgba(209, 122, 255, 0.3);
+        }
+
+        .unlock-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1.1rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(230, 57, 118, 0.3);
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        .dark-mode .unlock-btn {
+            box-shadow: 0 10px 20px rgba(166, 99, 204, 0.4);
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(230, 57, 118, 0.4);
+        }
+
+        .dark-mode .unlock-btn:hover {
+            box-shadow: 0 15px 25px rgba(166, 99, 204, 0.5);
+        }
+
+        .password-error {
+            margin-top: 1.2rem;
+            min-height: 1.5rem;
+            font-weight: 500;
+            color: #ff4757;
+        }
+
+        /* Header with Premium Controls */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            transition: all var(--transition-speed);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-title {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 1.2rem;
+            padding-top: 20px;
+            padding-left: 10px;
+        }
+
+        .control-btn {
+            background: var(--card-color);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 100pc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            color: var(--secondary-color);
+        }
+
+        .control-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 8rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section – Elegant Premium */
+.hero-section {
+  text-align: center;
+  padding: 4rem 1.5rem 5rem;
+  margin-bottom: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft glowing background */
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(244, 143, 177, 0.25),
+    rgba(255, 245, 248, 0.05) 70%
+  );
+  border-radius: 32px;
+  z-index: -1;
+  filter: blur(2px);
+}
+
+/* Title */
+.hero-title {
+  font-family: "Parisienne", cursive;
+  font-size: clamp(3rem, 7vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.2rem;
+
+  background: linear-gradient(
+    135deg,
+    #f48fb1,
+    #d81b60,
+    #ad1457
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.hero-divider {
+  width: 80px;
+  height: 2px;
+  margin: 1.8rem auto 2.2rem;
+  background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+  border-radius: 4px;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  color: rgba(60, 20, 40, 0.75);
+
+  max-width: 640px;
+  margin: 0 auto;
+  animation: fadeUp 1.2s ease forwards 0.3s;
+}
+
+/* Soft entrance animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+        .private-note {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border-radius: 18px;
+            display: inline-block;
+            color: var(--text-color);
+            max-width: 600px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* Note Section - Premium Card */
+        .note-section {
+            background: var(--card-color);
+            padding: 3.5rem;
+            border-radius: 24px;
+            margin-bottom: 5rem;
+            box-shadow: 0 20px 60px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .note-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--gradient);
+        }
+
+        .note-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .note-content {
+            line-height: 1.8;
+            font-size: 1.15rem;
+        }
+
+        .note-content p {
+            margin-bottom: 1.8rem;
+        }
+
+        /* Premium Card Gallery */
+        .gallery-section {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3.5rem;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-container {
+            position: relative;
+            height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px;
+            margin-bottom: 3rem;
+            overflow: visible;
+        }
+
+        .card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: transform var(--transition-speed);
+        }
+
+        .card {
+            position: absolute;
+            width: 320px;
+            height: 480px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: all var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card.active {
+            z-index: 10;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            border-color: var(--primary-color);
+        }
+
+        .card.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-btn {
+            background: var(--card-color);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .gallery-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px var(--shadow-color);
+            color: var(--secondary-color);
+        }
+
+        .gallery-instructions {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+        }
+
+        /* Premium Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--card-color);
+            color: var(--text-color);
+            margin-top: 4rem;
+            border-radius: 24px 24px 0 0;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .footer p {
+            margin-bottom: 0.8rem;
+            font-weight: 300;
+        }
+
+        .footer-heart {
+            color: var(--primary-color);
+            animation: heartbeat 1.5s ease infinite;
+            display: inline-block;
+        }
+
+        /* Floating Elements - Premium */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            bottom: -50px;
+            font-size: 22px;
+            opacity: 0.8;
+            animation: floatUp linear infinite;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+        }
+        .lock-icon i {
+  font-size: 3rem;
+  color: #f48fb1;
+  text-shadow: 0 8px 30px rgba(244, 143, 177, 0.45);
+}
+
+
+        /* Animations */
+        @keyframes floatIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .card {
+                width: 280px;
+                height: 420px;
+            }
+            
+            .gallery-container {
+                height: 460px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .note-section, .lock-container {
+                padding: 2.5rem;
+            }
+            
+            .card {
+                width: 240px;
+                height: 360px;
+            }
+            
+            .gallery-container {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.2rem 1.5rem;
+            }
+            
+            .main-content {
+                padding: 7rem 1rem 3rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .note-title, .gallery-title {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                width: 200px;
+                height: 300px;
+            }
+            
+            .gallery-container {
+                height: 340px;
+            }
+            
+            .gallery-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .lock-container {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .note-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .card {
+                width: 180px;
+                height: 270px;
+            }
+            
+            .gallery-container {
+                height: 300px;
+            }
+            
+            .header-title {
+                font-size: 1.3rem;
+            }
+            
+            .control-btn, .gallery-btn {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .card {
+                width: 160px;
+                height: 240px;
+            }
+            
+            .gallery-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lock Screen -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-container">
+            <div class="lock-icon">
+  <i class="fa-solid fa-heart-lock"></i>
+</div>
+
+            <h2 class="password-title">Unlock My Heart</h2>
+            <p class="password-subtitle">Enter our special code to reveal a surprise</p>
+            <div class="password-input-container">
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter the secret code">
+            </div>
+            <button class="unlock-btn" id="unlockBtn">Unlock My Love</button>
+            <div class="password-error" id="passwordError"></div>
+        </div>
+    </div>
+
+    <!-- Header with Controls -->
+
+        <div class="header-controls">
+            <button class="control-btn" id="musicToggle">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="darkModeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+
+    <!-- Floating Elements -->
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-background"></div>
+            <h1 class="hero-title" id="valentineName">My Dearest Love</h1>
+            <p class="hero-subtitle">Every moment with you is a beautiful memory, and every day with you is a blessing. You are the reason my heart beats with joy.</p>
+            <div class="hero-divider"></div>
+            <div class="private-note">
+                <p>Just a little note to remind you how incredibly special you are to me. No matter where life takes us, my love for you will only grow stronger.</p>
+            </div>
+        </section>
+<div class="hero-divider"></div>
+
+        <!-- Note Section -->
+        <section class="note-section">
+            <h2 class="note-title">From My Heart To Yours</h2>
+            <div class="note-content">
+                <p>My dearest, as I sit down to write this, my heart overflows with emotions that words can scarcely capture. From our first meeting to this very moment, you've transformed my world in ways I never thought possible.</p>
+                <p>Your laughter is my favorite melody, your smile my greatest treasure, and your love the anchor that grounds me. Through all of life's ups and downs, you've been my constant, my safe haven, my home.</p>
+                <p>I cherish the quiet moments just as much as the grand adventures - the morning coffees, the late-night conversations, the comfortable silences that speak volumes. With you, every ordinary moment becomes extraordinary.</p>
+                <p>This Valentine's Day, I want to renew my promise to you: to love you fiercely, to support you endlessly, to cherish you always. You are, and will forever be, my greatest love story.</p>
+            </div>
+        </section>
+<div class="hero-divider"></div>
+
+        <!-- Card Gallery -->
+        <section class="gallery-section">
+            <h2 class="gallery-title">Our Journey Together</h2>
+            <div class="gallery-container">
+                <div class="card-stack" id="cardStack">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="prevCard">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-btn" id="nextCard">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <p class="gallery-instructions">Click the center card to spread | Swipe or use arrows to navigate</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Created with <span class="footer-heart">❤️</span> for the most amazing person in my life</p>
+        <p>Every day with you is Valentine's Day</p>
+        <p>© Forever Yours</p>
+    </footer>
+
+    <!-- Background Music (Hidden) -->
+    <audio id="backgroundMusic" loop>
+        <source src="C:\Users\LENOVO X250\Desktop\Luna\music\snowman.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // DOM Elements
+        const lockScreen = document.getElementById('lockScreen');
+        const passwordInput = document.getElementById('passwordInput');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const passwordError = document.getElementById('passwordError');
+        const musicToggle = document.getElementById('musicToggle');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const valentineName = document.getElementById('valentineName');
+        const cardStack = document.getElementById('cardStack');
+        const prevCardBtn = document.getElementById('prevCard');
+        const nextCardBtn = document.getElementById('nextCard');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const floatingElements = document.getElementById('floatingElements');
+        
+        // App State
+        const state = {
+            isUnlocked: false,
+            isDarkMode: false,
+            isMusicPlaying: false,
+            isCardStackSpread: false,
+            currentCardIndex: 2, // Center card initially
+            totalCards: 5,
+            cards: [],
+            touchStartX: 0,
+            touchEndX: 0,
+            isAnimating: false
+        };
+        
+        // Correct password (DDMM format)
+        const CORRECT_PASSWORD = "1402"; // Change to your special date
+        
+        // Premium Image URLs - Replace with your own images
+        const cardData = [
+  {
+    image: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  },
+  {
+    image: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=800&q=80",
+    caption: ""
+  }
+];
+
+
+        // Premium emojis for floating elements
+        const floatingEmojis = ['❤️', ];
+        
+        // Initialize the page
+        function init() {
+            // Set valentine's name
+            valentineName.textContent = "My Dearest Sarah";
+            
+            // Create cards
+            createCards();
+            
+            // Position cards initially (stacked)
+            positionCards();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Create floating elements
+            createFloatingElements();
+            
+            // Add subtle animation to hero section
+            animateHeroSection();
+        }
+        
+        // Create premium card elements
+        function createCards() {
+            cardStack.innerHTML = '';
+            state.cards = [];
+            
+            for (let i = 0; i < state.totalCards; i++) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = i;
+                
+                const img = document.createElement('img');
+                img.src = cardData[i].image;
+                img.alt = `Memory ${i + 1}`;
+                img.loading = 'lazy';
+                
+                card.appendChild(img);
+                cardStack.appendChild(card);
+                
+                state.cards.push(card);
+                
+                // Add click event to each card
+                card.addEventListener('click', () => {
+                    if (!state.isCardStackSpread) {
+                        toggleCardSpread();
+                    } else {
+                        // If clicked on a non-active card when spread, make it active
+                        const clickedIndex = parseInt(card.dataset.index);
+                        if (clickedIndex !== state.currentCardIndex) {
+                            state.currentCardIndex = clickedIndex;
+                            positionCards();
+                        }
+                    }
+                });
+            }
+            
+            // Set the active card
+            state.cards[state.currentCardIndex].classList.add('active');
+        }
+        
+        // Position cards based on current state
+        function positionCards() {
+            if (state.isAnimating) return;
+            
+            state.isAnimating = true;
+            
+            if (!state.isCardStackSpread) {
+                // Stack cards (initial state) - all centered
+                state.cards.forEach((card, index) => {
+                    card.style.left = '50%';
+                    card.style.transform = 'translateX(-50%) translateY(-50%)';
+                    card.style.zIndex = index + 1;
+                    card.style.opacity = index === state.totalCards - 1 ? '1' : '0.9';
+                    
+                    // Remove active class from all cards
+                    card.classList.remove('active');
+                });
+                
+                // Make top card active
+                state.cards[state.totalCards - 1].classList.add('active');
+                state.currentCardIndex = state.totalCards - 1;
+            } else {
+                // Spread cards partially
+                const containerWidth = cardStack.offsetWidth;
+                const cardWidth = state.cards[0].offsetWidth;
+                const spreadDistance = Math.min(containerWidth * 0.7, cardWidth * 3);
+                const centerPosition = containerWidth / 2 - cardWidth / 2;
+                
+                // Calculate positions for each card
+                state.cards.forEach((card, index) => {
+                    let position;
+                    let scale = 1;
+                    let zIndex = 1;
+                    let opacity = 1;
+                    
+                    if (index === state.currentCardIndex) {
+                        // Center card
+                        position = centerPosition;
+                        scale = 1;
+                        zIndex = 10;
+                        opacity = 1;
+                        card.classList.add('active');
+                    } else {
+                        // Calculate offset based on distance from active card
+                        const offset = (index - state.currentCardIndex) * (cardWidth * 0.7);
+                        position = centerPosition + offset;
+                        
+                        // Cards further from center are smaller and have lower z-index
+                        const distance = Math.abs(index - state.currentCardIndex);
+                        scale = 1 - (distance * 0.1);
+                        opacity = 1 - (distance * 0.2);
+                        zIndex = 10 - distance;
+                        
+                        // Ensure cards don't go off screen
+                        const minPosition = -cardWidth * 0.5;
+                        const maxPosition = containerWidth - cardWidth * 0.5;
+                        position = Math.max(minPosition, Math.min(maxPosition, position));
+                        
+                        card.classList.remove('active');
+                    }
+                    
+                    // Apply styles with smooth transition
+                    card.style.left = `${position}px`;
+                    card.style.transform = `translateX(0) translateY(-50%) scale(${scale})`;
+                    card.style.zIndex = zIndex;
+                    card.style.opacity = opacity;
+                });
+            }
+            
+            // Reset animation flag after transition completes
+            setTimeout(() => {
+                state.isAnimating = false;
+            }, 500);
+        }
+        
+        // Create floating elements (hearts, flowers, etc.)
+        function createFloatingElements() {
+            // Clear any existing elements
+            floatingElements.innerHTML = '';
+            
+            // Create floating elements
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                const randomEmoji = floatingEmojis[Math.floor(Math.random() * floatingEmojis.length)];
+                element.className = 'floating-element';
+                element.textContent = randomEmoji;
+                
+                // Random position
+                const left = Math.random() * 100;
+                element.style.left = `${left}%`;
+                
+                // Random animation duration
+                const duration = 20 + Math.random() * 25;
+                element.style.animationDuration = `${duration}s`;
+                
+                // Random size
+                const size = 18 + Math.random() * 24;
+                element.style.fontSize = `${size}px`;
+                
+                // Random color for some elements
+                if (Math.random() > 0.5) {
+                    element.style.color = getComputedStyle(document.documentElement)
+                        .getPropertyValue('--primary-color').trim();
+                }
+                
+                // Random delay
+                const delay = Math.random() * 10;
+                element.style.animationDelay = `${delay}s`;
+                
+                floatingElements.appendChild(element);
+                
+                // Remove element after animation completes and create a new one
+                setTimeout(() => {
+                    element.remove();
+                    createFloatingElements();
+                }, duration * 1000);
+            }
+        }
+        
+        // Add subtle animation to hero section
+        function animateHeroSection() {
+            const heroTitle = document.querySelector('.hero-title');
+            const privateNote = document.querySelector('.private-note');
+            
+            // Add entrance animation
+            heroTitle.style.opacity = '0';
+            heroTitle.style.transform = 'translateY(20px)';
+            
+            privateNote.style.opacity = '0';
+            privateNote.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                heroTitle.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroTitle.style.opacity = '1';
+                heroTitle.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    privateNote.style.transition = 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s';
+                    privateNote.style.opacity = '1';
+                    privateNote.style.transform = 'translateY(0)';
+                }, 300);
+            }, 500);
+        }
+        
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Password unlock
+            unlockBtn.addEventListener('click', unlockContent);
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    unlockContent();
+                }
+            });
+            
+            // Music toggle
+            musicToggle.addEventListener('click', toggleMusic);
+            
+            // Dark mode toggle
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+            
+            // Card navigation
+            prevCardBtn.addEventListener('click', showPrevCard);
+            nextCardBtn.addEventListener('click', showNextCard);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!state.isUnlocked || state.isAnimating) return;
+                
+                if (e.key === 'ArrowLeft') {
+                    showPrevCard();
+                } else if (e.key === 'ArrowRight') {
+                    showNextCard();
+                } else if (e.key === 'Escape' && state.isCardStackSpread) {
+                    // Collapse cards on escape
+                    toggleCardSpread();
+                }
+            });
+            
+            // Touch swipe for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            cardStack.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, {passive: true});
+            
+            cardStack.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const touchEndY = e.changedTouches[0].screenY;
+                
+                // Calculate swipe distance
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                
+                // Only handle horizontal swipes with minimal vertical movement
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                    if (diffX > 0) {
+                        // Swipe left - next card
+                        showNextCard();
+                    } else {
+                        // Swipe right - previous card
+                        showPrevCard();
+                    }
+                }
+            }, {passive: true});
+            
+            // Window resize
+            window.addEventListener('resize', () => {
+                if (state.isCardStackSpread) {
+                    positionCards();
+                }
+            });
+        }
+        
+        // Unlock content with password
+        function unlockContent() {
+            const password = passwordInput.value.trim();
+            
+            if (password === CORRECT_PASSWORD) {
+                // Hide lock screen with premium animation
+                lockScreen.classList.add('hidden');
+                state.isUnlocked = true;
+                
+                // Auto-play music (with user interaction)
+                setTimeout(() => {
+                    if (!state.isMusicPlaying) {
+                        toggleMusic();
+                    }
+                }, 800);
+                
+                // Set focus to body for keyboard controls
+                document.body.focus();
+                
+                // Add celebration effect
+                addCelebrationEffect();
+            } else {
+                passwordError.textContent = "Incorrect code. Please try again.";
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // Shake animation
+                passwordInput.style.animation = 'none';
+                setTimeout(() => {
+                    passwordInput.style.animation = 'shake 0.5s';
+                }, 10);
+            }
+        }
+        
+        // Add celebration effect when unlocked
+        function addCelebrationEffect() {
+            const container = document.querySelector('.lock-container');
+            
+            // Create celebration elements
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.fontSize = '24px';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.opacity = '1';
+                heart.style.zIndex = '100';
+                heart.style.transform = 'translate(-50%, -50%)';
+                heart.style.transition = 'all 1s ease-out';
+                
+                container.appendChild(heart);
+                
+                // Animate heart
+                setTimeout(() => {
+                    const angle = (i / 15) * Math.PI * 2;
+                    const distance = 100 + Math.random() * 100;
+                    const x = Math.cos(angle) * distance;
+                    const y = Math.sin(angle) * distance;
+                    
+                    heart.style.left = `calc(50% + ${x}px)`;
+                    heart.style.top = `calc(50% + ${y}px)`;
+                    heart.style.opacity = '0';
+                    heart.style.transform = `translate(-50%, -50%) scale(0.5)`;
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 1000);
+                }, 10);
+            }
+        }
+        
+        // Toggle background music
+        function toggleMusic() {
+            if (state.isMusicPlaying) {
+                backgroundMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+                musicToggle.classList.remove('active');
+            } else {
+                backgroundMusic.play().catch(e => {
+                    console.log("Autoplay prevented. User interaction required.");
+                    musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+                });
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                musicToggle.classList.add('active');
+            }
+            
+            state.isMusicPlaying = !state.isMusicPlaying;
+        }
+        
+        // Toggle dark mode
+        function toggleDarkMode() {
+            state.isDarkMode = !state.isDarkMode;
+            
+            if (state.isDarkMode) {
+                document.body.classList.add('dark-mode');
+                lockScreen.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                darkModeToggle.classList.add('active');
+            } else {
+                document.body.classList.remove('dark-mode');
+                lockScreen.classList.remove('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                darkModeToggle.classList.remove('active');
+            }
+            
+            // Update floating elements colors
+            createFloatingElements();
+        }
+        
+        // Toggle card stack between spread and stacked
+        function toggleCardSpread() {
+            if (state.isAnimating) return;
+            
+            state.isCardStackSpread = !state.isCardStackSpread;
+            
+            // Reposition cards
+            positionCards();
+        }
+        
+        // Show previous card
+        function showPrevCard() {
+            if (state.isAnimating) return;
+            
+            if (!state.isCardStackSpread) {
+                toggleCardSpread();
+            }
+            
+            state.currentCardIndex = (state.currentCardIndex - 1 + state.totalCards) % state.totalCards;
+            positionCards();
+        }
+        
+        // Show next card
+        function showNextCard() {
+            if (state.isAnimating) return;
+            
+            if (!state.isCardStackSpread) {
+                toggleCardSpread();
+            }
+            
+            state.currentCardIndex = (state.currentCardIndex + 1) % state.totalCards;
+            positionCards();
+        }
+        
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+        
+        // Add shake animation for password input
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
